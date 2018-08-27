@@ -1,0 +1,8 @@
+﻿<div class="border" >
+  <div class="row" *ngFor="let row of gameBoard">
+    <div 
+    *ngFor="let cell of row" 
+    class="cell {{cell.status}}" 
+    (click)="cell.shoot" ></div>
+  </div>
+</div>
