@@ -4,7 +4,7 @@ import { ShipCell } from "./ShipCell";
 
 export class BoardGenerator{
 	static generateBoard(){
-		var gameBoard = Array(10).fill(0).map(x => Array(10).fill(new EmptyCell())); 
+		var gameBoard = Array(10).fill(0).map(x => Array(10).fill(1).map(x => new EmptyCell())); 
 
 		gameBoard[0][1] = new ShipCell();
 		gameBoard[0][2] = new ShipCell();
@@ -18,6 +18,7 @@ export class BoardGenerator{
 
 		gameBoard[8][9] = new ShipCell();
 
+		console.log('gameBoard', gameBoard);
 		return gameBoard;	
 	}
 }

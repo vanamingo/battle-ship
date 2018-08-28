@@ -3,6 +3,6 @@
     <div 
     *ngFor="let cell of row" 
     class="cell {{cell.status}}" 
-    (click)="cell.shoot" ></div>
+    (click)="cell.shoot()" ></div>
   </div>
 </div>
