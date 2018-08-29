@@ -2,7 +2,7 @@
 import { EmptyCell } from "./EmptyCell";
 import { ShipCell } from "./ShipCell";
 
-export class BoardGenerator{
+export class Board{
 	static generateBoard(){
 		var gameBoard = Array(10).fill(0).map(x => Array(10).fill(1).map(x => new EmptyCell())); 
 

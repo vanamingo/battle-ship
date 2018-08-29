@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ShipCell } from 'src/app/Model/ShipCell';
-import { BoardGenerator } from 'src/app/Model/BoardGenerator';
+import { Board } from 'src/app/Model/Board';
 import { IGameCell } from '../../Model/IGameCell';
 
 @Component({
@@ -18,7 +18,7 @@ export class BoardComponent implements OnInit {
    // let c = new ShipCell();
 
 
-    this.gameBoard = BoardGenerator.generateBoard();
+    this.gameBoard = Board.generateBoard();
   }
 
   cellsRows: Number[][]
