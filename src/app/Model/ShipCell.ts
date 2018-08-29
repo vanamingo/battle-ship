@@ -8,7 +8,8 @@ export class ShipCell implements IGameCell{
 	ship: Ship;
 	shoot(): void {
 		console.log('ShipCell shoot');
-		this.status = CellStatusEnum.Broken;
+		this.isOpened = true;
+		this.ship.catchShoot(this);
 	}
 	constructor(ship: Ship){
 		this.ship = ship;

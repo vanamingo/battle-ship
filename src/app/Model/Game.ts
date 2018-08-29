@@ -4,7 +4,10 @@ import { ShipCell } from "./ShipCell";
 import { Ship } from "./Ship";
 
 export class Game {
-	constructor() {
+	readonly gameBoard: IGameCell[][]
+
+	constructor() {	
+
 		this.gameBoard = Array(10).fill(0).map(x => Array(10).fill(1).map(x => new EmptyCell()));
 
 		this.addShipL();
@@ -13,8 +16,6 @@ export class Game {
 
 		console.log('startNewBattle gameBoard', this.gameBoard);
 	}
-
-	gameBoard: IGameCell[][]
 
 	private addShipL() {
 		let ship = new Ship(4);

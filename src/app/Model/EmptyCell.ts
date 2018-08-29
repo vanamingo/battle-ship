@@ -6,6 +6,7 @@ export class EmptyCell implements IGameCell{
 	status: CellStatusEnum = CellStatusEnum.Hidden;
 	constructor(){}
 	shoot(): void {
+		this.isOpened = true;
 		this.status = CellStatusEnum.Missed;
 	}
 }
