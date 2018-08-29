@@ -13,12 +13,7 @@ export class BoardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-	 // this.cellsRows = [[1, 2, 3], [4, 5, 6]];
-   // console.log(this.cellsRows);
-   // let c = new ShipCell();
     let game = new Game();
-    game.startNewBattle();
-
     this.gameBoard = game.gameBoard;
   }
 

@@ -1,14 +1,16 @@
 ﻿import { IGameCell } from "./IGameCell";
 import { CellStatusEnum } from "./CellStatusEnum";
+import { Ship } from "./Ship";
 
 export class ShipCell implements IGameCell{
-	status: CellStatusEnum;
+	isOpened: boolean = false;
+	status: CellStatusEnum= CellStatusEnum.Hidden;
+	ship: Ship;
 	shoot(): void {
 		console.log('ShipCell shoot');
 		this.status = CellStatusEnum.Broken;
 	}
-	readonly isShipCell: Boolean = true;
-	constructor(){
-		this.status = CellStatusEnum.Hidden;
+	constructor(ship: Ship){
+		this.ship = ship;
 	}
 }

@@ -1,0 +1,37 @@
+import { ShipCell } from "./ShipCell";
+import { ShipStatusEnum } from "./ShipStatusEnum";
+import { CellStatusEnum } from "./CellStatusEnum";
+
+export class Ship{
+    readonly cells: ShipCell[]
+    status: ShipStatusEnum = ShipStatusEnum.Ok;
+
+    constructor(cellsNumber: number){
+        this.cells = Array(cellsNumber).fill(0).map(x => new ShipCell(this));
+    }
+
+    catchShoot(cell: ShipCell){
+        if(!this.cells.includes(cell)){
+            console.log('!!! this.cells.includes(cell) ERROR');
+        }
+
+        cell.status  = CellStatusEnum.Broken;
+        this.recalcStatus();
+    }
+
+    private recalcStatus() {
+        if (this.cells.every(c => c.isOpened)) {
+            this.status = ShipStatusEnum.Killed;
+
+            this.cells.forEach(c => {c.status = CellStatusEnum.Killed});
+            return;
+        }
+
+        if(this.cells.some(c => c.isOpened)){
+            this.status = ShipStatusEnum.Broken;
+            return;
+        }
+
+        this.status = ShipStatusEnum.Ok;
+    }
+}
