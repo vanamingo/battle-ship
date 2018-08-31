@@ -2,9 +2,19 @@
 import { EmptyCell } from "./EmptyCell";
 import { ShipCell } from "./ShipCell";
 import { Ship } from "./Ship";
+import { Coordinate } from './Coordinate';
 
 export class Game {
 	readonly gameBoard: IGameCell[][]
+	private surroundingOffset = [
+		new Coordinate(1,1),
+		new Coordinate(0,1),
+		new Coordinate(-1,1),
+		new Coordinate(-1,0),
+		new Coordinate(-1,-1),
+		new Coordinate(0,-1),
+		new Coordinate(1,-1),
+		new Coordinate(1,0),];
 
 	constructor() {
 
@@ -13,6 +23,9 @@ export class Game {
 		this.addShipL();
 		this.addShipI();
 		this.addShipDot();
+		//console.log('startNewBattle gameBoard1', this.gameBoard);
+
+		this.addRandomShipL();
 
 		console.log('startNewBattle gameBoard', this.gameBoard);
 	}
@@ -24,6 +37,16 @@ export class Game {
 		this.gameBoard[5][6] = ship.cells[1];
 		this.gameBoard[6][6] = ship.cells[2];
 		this.gameBoard[6][7] = ship.cells[3];
+	}
+
+	private addRandomShipL() {
+		let ship = new Ship(4);
+		let offset: Array<Coordinate> = [
+			new Coordinate(0,0),
+			new Coordinate(-1,0),
+			new Coordinate(-1,1),
+			new Coordinate(-1,2)];
+		this.insertToRandomPlace(ship.cells, offset);
 	}
 
 	private addShipI() {
@@ -41,25 +64,56 @@ export class Game {
 		this.gameBoard[7][8] = ship.cells[0];
 	}
 
-	private insertToRandomPlace(cells: ShipCell[], offset: Array<[number, number]>) {
+	private insertToRandomPlace(cells: ShipCell[], offsetList: Array<Coordinate>) {
+		let i = 0;
 		while (true) {
-			let startCoordinates = this.getRandomCellCoordinations();
+			i++;
+			if(i === 10){
+				return;
+			}
 			
-			
+			let startCoordinates = this.getRandomCellCoordinate();
+			console.log('insertToRandomPlace', startCoordinates );
+			let shipCoordinates = offsetList.map( o => startCoordinates.addCoordinates(o));
+
+			if(shipCoordinates.some(c => !this.isValidShipCell(c))){
+				console.log('shipCoordinates are invalid', shipCoordinates);
+				continue;
+			}
+
+			let shipCells = cells.slice(0);
+
+			shipCoordinates.forEach(coordinate => {
+				this.gameBoard[coordinate.X][coordinate.Y] = shipCells.pop();				
+			});	
+
+			break;	
 		 }
-
 	}
 
-	private canCellBePlacedHere(cell: ShipCell, coordinate:[number, number]) : boolean{
+	private isValidShipCell(coordinate: Coordinate) : boolean{
+		if(!coordinate.isInBoardRange()){
+			return false;
+		}
 
-
-		return false;
+		let surroundingCells = this.GetSurroundingCells(coordinate);
+		return surroundingCells.every(c => {
+			return !c || c instanceof EmptyCell;
+		});
 	}
 
-
-	private getRandomCellCoordinations(): [number, number] {
-		return [this.randomInt(), this.randomInt()];
+	private GetSurroundingCells(coordinate: Coordinate): Array<IGameCell>{
+		return this.surroundingOffset
+		.map(o => o.addCoordinates(coordinate))
+		.map(o => { 
+			return o.isInBoardRange()? this.gameBoard[o.X][o.Y] : null;		
+		});	
 	}
+
+	private getRandomCellCoordinate(): Coordinate {
+		return new Coordinate(this.randomInt(), this.randomInt());
+	}
+
 	private randomInt(): number {
 		let min = 0;
 		let max = 9;
