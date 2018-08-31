@@ -4,7 +4,7 @@ import { Ship } from "./Ship";
 
 export class ShipCell implements IGameCell{
 	isOpened: boolean = false;
-	status: CellStatusEnum= CellStatusEnum.Hidden;
+	status: CellStatusEnum= CellStatusEnum.Broken;
 	ship: Ship;
 	shoot(): void {
 		console.log('ShipCell shoot');
