@@ -11,6 +11,24 @@ export class Game {
 
 	constructor() {
 		this.gameBoard = this.borderGenerator.generateNewBoard();
-		console.log('startNewBattle gameBoard', this.gameBoard);
+		this.logBoard();
 	}	
+
+
+	private logBoard(){
+		let logBoard = this.gameBoard.map(row => row.map(cell => { 
+			return cell instanceof ShipCell ? 'X' : ''; 
+		}).reduce(function(previousValue, currentValue, index) {
+	
+			previousValue[index] = currentValue;
+		 return previousValue;
+		 }, {})
+	);
+
+
+
+
+		console.table( logBoard);
+
+	}
 }
