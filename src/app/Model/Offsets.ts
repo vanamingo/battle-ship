@@ -1,10 +1,12 @@
 ﻿import { Coordinate } from "./Coordinate";
+import { IGameCell } from "./IGameCell";
+import { Ship } from "./Ship";
+import { ShipCell } from "./ShipCell";
+import { EmptyCell } from "./EmptyCell";
 
 export class Offsets {
-	shipLVariants = this.getShipLVariants()
 
-
-	surroundingOffset = [
+	static surroundingOffset = [
 		new Coordinate(1, 1),
 		new Coordinate(0, 1),
 		new Coordinate(-1, 1),
@@ -14,91 +16,43 @@ export class Offsets {
 		new Coordinate(1, -1),
 		new Coordinate(1, 0),];
 
-	private gameBoard: IGameCell[][];
+	
 
-	generateNewBoard(): IGameCell[][] {
-		this.gameBoard = Array(10).fill(0).map(x => Array(10).fill(null).map(x => new EmptyCell()));
+	 static getShipDotVariants(): Coordinate[][]{
+		let v1: Array<Coordinate> = [
+			new Coordinate(0, 0)];
+		return  [] = [v1];
+	 }
 
-		this.addRandomShipL();
-		return this.gameBoard;
-	}
+	 static getShipIVariants(): Coordinate[][]{
+		let v1: Array<Coordinate> = [
+			new Coordinate(0, 0),
+			new Coordinate(-1, 0),
+			new Coordinate(-2, 0),
+			new Coordinate(-3, 0)];
 
-	private getShipLVariants(): Array<Coordinate>{
+		let v2 =  v1.map(c => c.reverse());
+		return  [] = [v1, v2,];
+	 }
+
+	 static getShipLVariants(): Coordinate[][]{
+
+		// HORISONTAL L SHIPS
 		let v1: Array<Coordinate> = [
 			new Coordinate(0, 0),
 			new Coordinate(-1, 0),
 			new Coordinate(-1, 1),
 			new Coordinate(-1, 2)];
-		
-			let v2 = v1.map();
+	
+		let v2: Array<Coordinate> = v1.map(c => c.multiply(-1,1));
+		let v3: Array<Coordinate> = v1.map(c => c.multiply(1,-1));
+		let v4: Array<Coordinate> = v1.map(c => c.multiply(-1,-1));
 
-		return new Array<Coordinate>();
-	}
+		let v5 = v1.map(c => c.reverse());
+		let v6 = v2.map(c => c.reverse());
+		let v7 = v3.map(c => c.reverse());
+		let v8 = v4.map(c => c.reverse());
 
-
-	private addRandomShipL() {
-		let ship = new Ship(4);
-		let offset: Array<Coordinate> = [
-			new Coordinate(0, 0),
-			new Coordinate(-1, 0),
-			new Coordinate(-1, 1),
-			new Coordinate(-1, 2)];
-		this.insertToRandomPlace(ship.cells, offset);
-	}
-
-	private insertToRandomPlace(cells: ShipCell[], offsetList: Array<Coordinate>) {
-		let i = 0;
-		while (true) {
-			i++;
-			if (i === 10) {
-				return;
-			}
-
-			let startCoordinates = this.getRandomCellCoordinate();
-			console.log('insertToRandomPlace', startCoordinates);
-			let shipCoordinates = offsetList.map(o => startCoordinates.addCoordinates(o));
-
-			if (shipCoordinates.some(c => !this.isValidShipCell(c))) {
-				console.log('shipCoordinates are invalid', shipCoordinates);
-				continue;
-			}
-
-			let shipCells = cells.slice(0);
-
-			shipCoordinates.forEach(coordinate => {
-				this.gameBoard[coordinate.X][coordinate.Y] = shipCells.pop();
-			});
-
-			break;
-		}
-	}
-
-	private isValidShipCell(coordinate: Coordinate): boolean {
-		if (!coordinate.isInBoardRange()) {
-			return false;
-		}
-
-		let surroundingCells = this.GetSurroundingCells(coordinate);
-		return surroundingCells.every(c => {
-			return !c || c instanceof EmptyCell;
-		});
-	}
-
-	private GetSurroundingCells(coordinate: Coordinate): Array<IGameCell> {
-		return this.surroundingOffset
-			.map(o => o.addCoordinates(coordinate))
-			.map(o => {
-				return o.isInBoardRange() ? this.gameBoard[o.X][o.Y] : null;
-			});
-	}
-
-	private getRandomCellCoordinate(): Coordinate {
-		return new Coordinate(this.randomInt(), this.randomInt());
-	}
-
-	private randomInt(): number {
-		let min = 0;
-		let max = 9;
-		return Math.floor(Math.random() * (max - min + 1)) + min;
+		return  [] = [v1, v2, v3, v4, v5, v6, v7, v8];
 	}
 }

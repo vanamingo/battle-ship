@@ -3,6 +3,7 @@ import { EmptyCell } from "./EmptyCell";
 import { ShipCell } from "./ShipCell";
 import { Ship } from "./Ship";
 import { Coordinate } from './Coordinate';
+import { Offsets } from "./Offsets";
 
 export class BorderGenerator {
 	private surroundingOffset = [
@@ -17,22 +18,50 @@ export class BorderGenerator {
 
 	private gameBoard: IGameCell[][];
 
+
 	generateNewBoard(): IGameCell[][] {
 		this.gameBoard = Array(10).fill(0).map(x => Array(10).fill(null).map(x => new EmptyCell()));
 
 		this.addRandomShipL();
+		this.addRandomShipL();
+		this.addRandomShipI();
+		this.addRandomShipDot();
+		this.addRandomShipDot();
 		return this.gameBoard;
 	}
 
 
 	private addRandomShipL() {
-		let ship = new Ship(4);
-		let offset: Array<Coordinate> = [
-			new Coordinate(0, 0),
-			new Coordinate(-1, 0),
-			new Coordinate(-1, 1),
-			new Coordinate(-1, 2)];
+		//TODO: move to field. Set in constructor. 
+		let offsetSet = Offsets.getShipLVariants();
+
+		let offset = offsetSet[this.randomInt(0, 7)];
+
+		let ship = new Ship(4);		
 		this.insertToRandomPlace(ship.cells, offset);
+
+	}
+
+	private addRandomShipDot() {
+		//TODO: move to field. Set in constructor. 
+		let offsetSet = Offsets.getShipDotVariants();
+
+		let offset = offsetSet[0];
+
+		let ship = new Ship(1);		
+		this.insertToRandomPlace(ship.cells, offset);
+
+	}
+
+	private addRandomShipI() {
+		//TODO: move to field. Set in constructor. 
+		let offsetSet = Offsets.getShipIVariants();
+
+		let offset = offsetSet[this.randomInt(0, 1)];
+
+		let ship = new Ship(4);		
+		this.insertToRandomPlace(ship.cells, offset);
+
 	}
 
 	private insertToRandomPlace(cells: ShipCell[], offsetList: Array<Coordinate>) {
@@ -82,12 +111,10 @@ export class BorderGenerator {
 	}
 
 	private getRandomCellCoordinate(): Coordinate {
-		return new Coordinate(this.randomInt(), this.randomInt());
+		return new Coordinate(this.randomInt(0, 9), this.randomInt(0, 9));
 	}
 
-	private randomInt(): number {
-		let min = 0;
-		let max = 9;
+	private randomInt(min: number, max: number): number {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 }
