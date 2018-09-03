@@ -4,12 +4,18 @@ import { ShipCell } from "./ShipCell";
 import { Ship } from "./Ship";
 import { Coordinate } from './Coordinate';
 import { Offsets } from "./Offsets";
+import { ShipStatusEnum } from "./ShipStatusEnum";
 
 export class GameBoard {
 	gameBoard: IGameCell[][];
+	ships: Ship[] = [];
 
 	constructor(){
 		this.generateNewBoard();
+	}
+
+	allShipsAreKilled(){
+		return !this.ships.some(s => s.status !== ShipStatusEnum.Killed );
 	}
 
 	private generateNewBoard(): IGameCell[][] {
@@ -23,7 +29,6 @@ export class GameBoard {
 		return this.gameBoard;
 	}
 
-
 	private addRandomShipL() {
 		//TODO: move to field. Set in constructor. 
 		let offsetSet = Offsets.getShipLVariants();
@@ -32,7 +37,7 @@ export class GameBoard {
 
 		let ship = new Ship(4);		
 		this.insertToRandomPlace(ship.cells, offset);
-
+		this.ships.push(ship);
 	}
 
 	private addRandomShipDot() {
@@ -43,7 +48,7 @@ export class GameBoard {
 
 		let ship = new Ship(1);		
 		this.insertToRandomPlace(ship.cells, offset);
-
+		this.ships.push(ship);
 	}
 
 	private addRandomShipI() {
@@ -54,7 +59,7 @@ export class GameBoard {
 
 		let ship = new Ship(4);		
 		this.insertToRandomPlace(ship.cells, offset);
-
+		this.ships.push(ship);
 	}
 
 	private insertToRandomPlace(cells: ShipCell[], offsetList: Array<Coordinate>) {
@@ -62,15 +67,17 @@ export class GameBoard {
 		while (true) {
 			i++;
 			if (i === 10) {
+				//TODO: handle this. 
+				// For example regenerate whole board.
 				return;
 			}
 
 			let startCoordinates = this.getRandomCellCoordinate();
-			console.log('insertToRandomPlace', startCoordinates);
+			//console.log('insertToRandomPlace', startCoordinates);
 			let shipCoordinates = offsetList.map(o => startCoordinates.addCoordinates(o));
 
 			if (shipCoordinates.some(c => !this.isValidShipCell(c))) {
-				console.log('shipCoordinates are invalid', shipCoordinates);
+				//console.log('shipCoordinates are invalid', shipCoordinates);
 				continue;
 			}
 

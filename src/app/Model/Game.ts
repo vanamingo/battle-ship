@@ -4,21 +4,22 @@ import { GameBoard } from "./Border/BorderGenerator";
 import { Statistics } from "./Game/Statistics";
 
 export class Game {
-	readonly gameBoard: IGameCell[][]
+	readonly gameBoard: GameBoard
 	//readonly borderGenerator: Board = new Board()
 
 	isRobotTurn: boolean = false;
+	isFinished: boolean = false;
+
 	statistics: Statistics;
 
 	constructor() {
-		let gameBoard = new GameBoard();
-		this.gameBoard = gameBoard.gameBoard;
+		this.gameBoard =new GameBoard();;
 		this.statistics = new Statistics(); 
 		this.logBoard();
 	}
 
 	shoot(targetCell: IGameCell) {
-		if (this.isRobotTurn) {
+		if (this.isRobotTurn || this.isFinished) {
 			return;
 		}
 
@@ -34,6 +35,11 @@ export class Game {
 			}*/
 
 			this.statistics.UserShootHit++;
+
+			if(this.gameBoard.allShipsAreKilled()){
+				this.finishGame();
+			}
+
 			return;
 		}
 
@@ -41,6 +47,9 @@ export class Game {
 		this.robotMakesHisShoot();
 
 
+	}
+	finishGame(): any {
+		throw new Error("Method not implemented.");
 	}
 	robotMakesHisShoot(): void {
 
@@ -67,7 +76,7 @@ export class Game {
 
 
 	private logBoard() {
-		let logBoard = this.gameBoard.map(row => row.map(cell => {
+		let logBoard = this.gameBoard.gameBoard.map(row => row.map(cell => {
 			return cell instanceof ShipCell ? 'X' : '';
 		}).reduce(function (previousValue, currentValue, index) {
 

@@ -13,7 +13,7 @@ export class BoardComponent implements OnInit {
 
   ngOnInit() {
     let game = new Game();
-    this.gameBoard = game.gameBoard;
+    this.gameBoard = game.gameBoard.gameBoard;
   }
 
   gameBoard: IGameCell[][]
