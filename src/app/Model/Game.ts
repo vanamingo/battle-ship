@@ -1,17 +1,18 @@
 ﻿import { IGameCell } from "./Border/IGameCell";
 import { ShipCell } from "./Border/ShipCell";
-import { BorderGenerator } from "./Border/BorderGenerator";
+import { GameBoard } from "./Border/BorderGenerator";
 import { Statistics } from "./Game/Statistics";
 
 export class Game {
 	readonly gameBoard: IGameCell[][]
-	readonly borderGenerator: BorderGenerator = new BorderGenerator()
+	//readonly borderGenerator: Board = new Board()
 
 	isRobotTurn: boolean = false;
 	statistics: Statistics;
 
 	constructor() {
-		this.gameBoard = this.borderGenerator.generateNewBoard();
+		let gameBoard = new GameBoard();
+		this.gameBoard = gameBoard.gameBoard;
 		this.statistics = new Statistics(); 
 		this.logBoard();
 	}
@@ -42,7 +43,7 @@ export class Game {
 
 	}
 	robotMakesHisShoot(): void {
-		
+
 
 		this.isRobotTurn = false;
 	}

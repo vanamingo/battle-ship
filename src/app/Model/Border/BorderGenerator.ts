@@ -5,21 +5,14 @@ import { Ship } from "./Ship";
 import { Coordinate } from './Coordinate';
 import { Offsets } from "./Offsets";
 
-export class BorderGenerator {
-	private surroundingOffset = [
-		new Coordinate(1, 1),
-		new Coordinate(0, 1),
-		new Coordinate(-1, 1),
-		new Coordinate(-1, 0),
-		new Coordinate(-1, -1),
-		new Coordinate(0, -1),
-		new Coordinate(1, -1),
-		new Coordinate(1, 0),];
+export class GameBoard {
+	gameBoard: IGameCell[][];
 
-	private gameBoard: IGameCell[][];
+	constructor(){
+		this.generateNewBoard();
+	}
 
-
-	generateNewBoard(): IGameCell[][] {
+	private generateNewBoard(): IGameCell[][] {
 		this.gameBoard = Array(10).fill(0).map(x => Array(10).fill(null).map(x => new EmptyCell()));
 
 		this.addRandomShipL();
@@ -103,7 +96,7 @@ export class BorderGenerator {
 	}
 
 	private GetSurroundingCells(coordinate: Coordinate): Array<IGameCell> {
-		return this.surroundingOffset
+		return Offsets.surroundingOffset
 			.map(o => o.addCoordinates(coordinate))
 			.map(o => {
 				return o.isInBoardRange() ? this.gameBoard[o.X][o.Y] : null;
