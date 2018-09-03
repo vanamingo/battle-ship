@@ -1,5 +1,4 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { ShipCell } from '../../Model/Border/ShipCell';
 import { Game } from 'src/app/Model/Game';
 import { IGameCell } from '../../Model/Border/IGameCell';
 
@@ -16,8 +15,6 @@ export class BoardComponent implements OnInit {
     let game = new Game();
     this.gameBoard = game.gameBoard;
   }
-
-  cellsRows: Number[][]
 
   gameBoard: IGameCell[][]
 }

@@ -5,8 +5,10 @@ export class EmptyCell implements IGameCell{
 	isOpened: boolean = false;
 	status: CellStatusEnum = CellStatusEnum.Hidden;
 	constructor(){}
-	shoot(): void {
+	shoot(): boolean {
 		this.isOpened = true;
 		this.status = CellStatusEnum.Missed;
+
+		return false;
 	}
 }

@@ -1,7 +1,8 @@
 import { CellStatusEnum } from "./CellStatusEnum";
+import { Coordinate } from "./Coordinate";
 
 export interface IGameCell {
-	shoot(): void;
+	shoot(): boolean;
 	status: CellStatusEnum;
 	isOpened: boolean;
 }
