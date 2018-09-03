@@ -1,8 +1,5 @@
-﻿import { Coordinate } from "./Coordinate";
-import { IGameCell } from "./IGameCell";
-import { Ship } from "./Ship";
-import { ShipCell } from "./ShipCell";
-import { EmptyCell } from "./EmptyCell";
+import { Coordinate } from "./Coordinate";
+
 
 export class Offsets {
 

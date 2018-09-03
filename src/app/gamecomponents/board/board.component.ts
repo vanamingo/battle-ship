@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { ShipCell } from 'src/app/Model/ShipCell';
+import { ShipCell } from '../../Model/Border/ShipCell';
 import { Game } from 'src/app/Model/Game';
-import { IGameCell } from '../../Model/IGameCell';
+import { IGameCell } from '../../Model/Border/IGameCell';
 
 @Component({
   selector: 'app-board',

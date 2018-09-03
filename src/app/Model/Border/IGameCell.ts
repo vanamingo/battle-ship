@@ -1,5 +1,4 @@
-﻿import { CellStatusEnum } from "./CellStatusEnum";
-
+import { CellStatusEnum } from "./CellStatusEnum";
 
 export interface IGameCell {
 	shoot(): void;

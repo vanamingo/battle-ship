@@ -1,9 +1,9 @@
-﻿import { IGameCell } from "./IGameCell";
-import { EmptyCell } from "./EmptyCell";
-import { ShipCell } from "./ShipCell";
-import { Ship } from "./Ship";
-import { Coordinate } from './Coordinate';
-import { BorderGenerator } from "./BorderGenerator";
+﻿import { IGameCell } from "./Border/IGameCell";
+import { EmptyCell } from "./Border/EmptyCell";
+import { ShipCell } from "./Border/ShipCell";
+import { Ship } from "./Border/Ship";
+import { Coordinate } from './Border/Coordinate';
+import { BorderGenerator } from "./Border/BorderGenerator";
 
 export class Game {
 	readonly gameBoard: IGameCell[][]
