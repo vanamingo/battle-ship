@@ -19,7 +19,15 @@ export class GameBoard {
 	}
 
 	private generateNewBoard(): IGameCell[][] {
-		this.gameBoard = Array(10).fill(0).map(x => Array(10).fill(null).map(x => new EmptyCell()));
+		this.gameBoard = Array(10)
+			.fill(0)
+			.map(x => {
+				let k = 0;
+				return Array(10).fill(0).map(x => {
+					let p = 0;
+					return new EmptyCell(new Coordinate(k++, p++))
+				});
+			});
 
 		this.addRandomShipL();
 		this.addRandomShipL();
@@ -32,11 +40,9 @@ export class GameBoard {
 	private addRandomShipL() {
 		//TODO: move to field. Set in constructor. 
 		let offsetSet = Offsets.getShipLVariants();
-
 		let offset = offsetSet[this.randomInt(0, 7)];
 
-		let ship = new Ship(4);		
-		this.insertToRandomPlace(ship.cells, offset);
+		let ship = this.generateShip(offset);
 		this.ships.push(ship);
 	}
 
@@ -45,9 +51,7 @@ export class GameBoard {
 		let offsetSet = Offsets.getShipDotVariants();
 
 		let offset = offsetSet[0];
-
-		let ship = new Ship(1);		
-		this.insertToRandomPlace(ship.cells, offset);
+		let ship = this.generateShip(offset);
 		this.ships.push(ship);
 	}
 
@@ -56,10 +60,37 @@ export class GameBoard {
 		let offsetSet = Offsets.getShipIVariants();
 
 		let offset = offsetSet[this.randomInt(0, 1)];
-
-		let ship = new Ship(4);		
-		this.insertToRandomPlace(ship.cells, offset);
+		let ship = this.generateShip(offset);
 		this.ships.push(ship);
+	}
+
+	private generateShip(offsetList: Array<Coordinate>): Ship{
+		let i = 0;
+		while (true) {
+			i++;
+			if (i === 10) {
+				//TODO: handle this. 
+				// For example regenerate whole board.
+				return;
+			}
+
+			let startCoordinate = this.getRandomCellCoordinate();
+			let shipCells = offsetList.map(o => { return new ShipCell(startCoordinate.addCoordinates(o)); });
+
+			if (shipCells.some(c => !this.isValidShipCell(c.coordinate))) {
+				//console.log('shipCoordinates are invalid', shipCoordinates);
+				continue;
+			}
+
+			shipCells.forEach(cell => {
+				this.gameBoard[cell.coordinate.X][cell.coordinate.Y] = cell;
+			});
+
+
+			return new Ship(shipCells);
+		}
+
+
 	}
 
 	private insertToRandomPlace(cells: ShipCell[], offsetList: Array<Coordinate>) {

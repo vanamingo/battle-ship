@@ -6,8 +6,8 @@ export class Ship{
     readonly cells: ShipCell[]
     status: ShipStatusEnum = ShipStatusEnum.Ok;
 
-    constructor(cellsNumber: number){
-        this.cells = Array(cellsNumber).fill(0).map(x => new ShipCell(this));
+    constructor(shipCells: ShipCell[]){
+        this.cells = shipCells;
     }
 
     catchShoot(cell: ShipCell){

@@ -7,6 +7,7 @@ export class ShipCell implements IGameCell{
 	isOpened: boolean = false;
 	status: CellStatusEnum= CellStatusEnum.Hidden;
 	ship: Ship;
+	coordinate: Coordinate;
 	shoot(): boolean {
 		console.log('ShipCell shoot');
 		this.isOpened = true;
@@ -14,7 +15,7 @@ export class ShipCell implements IGameCell{
 
 		return true;
 	}
-	constructor(ship: Ship){
-		this.ship = ship;
+	constructor(coordinate: Coordinate){
+		this.coordinate = coordinate;
 	}
 }
