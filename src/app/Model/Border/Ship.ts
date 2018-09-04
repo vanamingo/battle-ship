@@ -8,6 +8,7 @@ export class Ship{
 
     constructor(shipCells: ShipCell[]){
         this.cells = shipCells;
+        this.cells.forEach(c => c.ship = this;)
     }
 
     catchShoot(cell: ShipCell){
