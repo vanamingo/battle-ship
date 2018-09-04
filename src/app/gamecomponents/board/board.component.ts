@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/app/Model/Game';
-import { IGameCell } from '../../Model/Border/IGameCell';
+import { IGameCell } from '../../Model/Board/IGameCell';
 
 @Component({
   selector: 'app-board',
@@ -12,9 +12,13 @@ export class BoardComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    let game = new Game();
-    this.gameBoard = game.gameBoard.gameBoard;
+    this.game = new Game();
   }
 
-  gameBoard: IGameCell[][]
+  shoot(targetCell: IGameCell){
+    console.log('Component shoot');
+    this.game.shoot(targetCell);
+  }
+
+  game: Game
 }

@@ -2,6 +2,7 @@
 import { ShipCell } from "./Board/ShipCell";
 import { GameBoard } from "./Board/Board";
 import { Statistics } from "./Game/Statistics";
+import { getRandomInt } from "./Utils/getRandomInt";
 
 export class Game {
 	readonly gameBoard: GameBoard
@@ -22,6 +23,7 @@ export class Game {
 			return;
 		}
 
+		targetCell.shoot();
 		if (targetCell instanceof ShipCell) {
 			this.statistics.UserShootHit++;
 
@@ -33,7 +35,7 @@ export class Game {
 		}
 
 		this.isRobotTurn = true;
-		this.robotMakesHisShoot();
+		setTimeout(() => this.robotMakesHisShoot(), 500);
 
 
 	}
@@ -41,7 +43,10 @@ export class Game {
 		throw new Error("Method not implemented.");
 	}
 	robotMakesHisShoot(): void {
+		let hiddenCells = this.gameBoard.getAllHiddenCells();
+		let hiddenCellIndex = getRandomInt(0, hiddenCells.length - 1);
 
+		hiddenCells[hiddenCellIndex].shoot();
 
 		this.isRobotTurn = false;
 	}
