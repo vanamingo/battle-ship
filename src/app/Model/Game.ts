@@ -1,11 +1,10 @@
-﻿import { IGameCell } from "./Border/IGameCell";
-import { ShipCell } from "./Border/ShipCell";
-import { GameBoard } from "./Border/BorderGenerator";
+﻿import { IGameCell } from "./Board/IGameCell";
+import { ShipCell } from "./Board/ShipCell";
+import { GameBoard } from "./Board/Board";
 import { Statistics } from "./Game/Statistics";
 
 export class Game {
 	readonly gameBoard: GameBoard
-	//readonly borderGenerator: Board = new Board()
 
 	isRobotTurn: boolean = false;
 	isGameFinished: boolean = false;
