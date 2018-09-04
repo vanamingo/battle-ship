@@ -8,7 +8,7 @@ export class Game {
 	//readonly borderGenerator: Board = new Board()
 
 	isRobotTurn: boolean = false;
-	isFinished: boolean = false;
+	isGameFinished: boolean = false;
 
 	statistics: Statistics;
 
@@ -19,21 +19,11 @@ export class Game {
 	}
 
 	shoot(targetCell: IGameCell) {
-		if (this.isRobotTurn || this.isFinished) {
+		if (this.isRobotTurn || this.isGameFinished || targetCell.isOpened) {
 			return;
 		}
 
-		if (targetCell.isOpened) {
-			return;
-		}
-
-		let isShip = targetCell.shoot();
-
-		if (isShip) {
-			/*if (shipCell.ship.status === ShipStatusEnum.Killed) {
-				this.openAllCellsAround(shipCell.ship);
-			}*/
-
+		if (targetCell instanceof ShipCell) {
 			this.statistics.UserShootHit++;
 
 			if(this.gameBoard.allShipsAreKilled()){
