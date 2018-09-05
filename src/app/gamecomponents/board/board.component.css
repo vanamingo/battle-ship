@@ -3,28 +3,63 @@
 }
 
 .cell {
-  border: 1px solid green;
+  border: 1px solid #C6D6D5;
   display: inline-block;
   width: 40px;
   height: 40px;
-  margin:1px;
   vertical-align:middle;
+
+  background-repeat: no-repeat;
+    background-size: 40px 40px;
 }
 
 .border {
   /*border: 1px solid blue;*/
 }
 
-.hidden{
-  background-color: lightslategray;
+.hidden1{
+  background-color: white;
 }
-.missed{
-  background-color: burlywood;
+.hidden2{
+  background-color: white;
 }
-.broken{
-  background-color: yellow;
+.hidden3{
+  background-color: white;
+}
+.missed1{
+  background-image: url(/assets/img/dot1.png);
+  /*background-color: burlywood;*/
+}
+.missed2{
+  background-image: url(/assets/img/dot2.png);
+  /*background-color: burlywood;*/
+}
+.missed3{
+  background-image: url(/assets/img/dot3.png);
+  /*background-color: burlywood;*/
+}
+.broken1{
+  background-image: url(/assets/img/X1.png);
+  /*background-color: yellow;*/
+}
+.broken2{
+  background-image: url(/assets/img/X2.png);
+  /*background-color: yellow;*/
+}
+.broken3{
+  background-image: url(/assets/img/X3.png);
+  /*background-color: yellow;*/
 }
 
-.killed{
-  background-color: red
+.killed1{
+  background-image: url(/assets/img/X1.png);
+  /*background-color: red*/
+}
+.killed2{
+  background-image: url(/assets/img/X2.png);
+  /*background-color: red*/
+}
+.killed3{
+  background-image: url(/assets/img/X3.png);
+  /*background-color: red*/
 }

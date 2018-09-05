@@ -5,5 +5,8 @@ export interface IGameCell {
 	shoot(): boolean;
 	status: CellStatusEnum;
 	isOpened: boolean;
-	coordinate: Coordinate
+	coordinate: Coordinate;
+
+
+	cssNumber: number; // TODO: make better solution. 
 }
