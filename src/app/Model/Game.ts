@@ -3,6 +3,7 @@ import { ShipCell } from "./Board/ShipCell";
 import { GameBoard } from "./Board/Board";
 import { Statistics } from "./Game/Statistics";
 import { getRandomInt } from "./Utils/getRandomInt";
+import { ShipStatusEnum } from "./Board/ShipStatusEnum";
 
 export class Game {
 	readonly gameBoard: GameBoard
@@ -13,7 +14,7 @@ export class Game {
 	statistics: Statistics;
 
 	constructor() {
-		this.gameBoard =new GameBoard();;
+		this.gameBoard =new GameBoard();
 		this.statistics = new Statistics(); 
 		this.logBoard();
 	}
@@ -23,51 +24,60 @@ export class Game {
 			return;
 		}
 
-		targetCell.shoot();
-		if (targetCell instanceof ShipCell) {
+		if(this.handleShoot(targetCell)){
 			this.statistics.UserShootHit++;
-
-			if(this.gameBoard.allShipsAreKilled()){
-				this.finishGame();
-			}
-
 			return;
 		}
 
 		this.isRobotTurn = true;
 		setTimeout(() => this.robotMakesHisShoot(), 500);
-
-
 	}
+
+
 	finishGame(): any {
-		throw new Error("Method not implemented.");
+		this.isGameFinished = true;
 	}
-	robotMakesHisShoot(): void {
-		let hiddenCells = this.gameBoard.getAllHiddenCells();
-		let hiddenCellIndex = getRandomInt(0, hiddenCells.length - 1);
+	private robotMakesHisShoot(): void {
 
-		hiddenCells[hiddenCellIndex].shoot();
+		let targetCell = this.getTargetCellForRobot();
+		if(this.handleShoot(targetCell)){
+			this.statistics.UserShootHit++;
+			setTimeout(() => this.robotMakesHisShoot(), 500);
+		}
 
 		this.isRobotTurn = false;
 	}
 
-	/*private openAllCellsAround(targetShip: Ship): void {
-		let cells = targetShip
-			.cells
-			.map(c =>
-				Offsets.surroundingOffset.map(o => o.addCoordinates(c))
-			)
-			.reduce((acc, item) => {
-				acc.concat(item);
-				return acc;
-			}, [])
-			.filter(c => { return c.isInBoardRange() && c instanceof EmptyCell })
-			.forEach(c => c.)
+	private getTargetCellForRobot(): IGameCell{
+		let cellsAroundSomeBrokenCell = this.gameBoard.getCellsAroundFirstBrokenOpenCell();
 
-		Offsets.surroundingOffset
+		if(cellsAroundSomeBrokenCell){
+			let index = getRandomInt(0, cellsAroundSomeBrokenCell.length - 1);
+			return cellsAroundSomeBrokenCell[index];
+		}
 
-	}*/
+		let hiddenCells = this.gameBoard.getAllHiddenCells();
+		let hiddenCellIndex = getRandomInt(0, hiddenCells.length - 1);
 
+		return hiddenCells[hiddenCellIndex];
+	}
+
+	private handleShoot(targetCell: IGameCell): boolean{
+		targetCell.shoot();
+		if (targetCell instanceof ShipCell) {	
+			if(targetCell.ship.status === ShipStatusEnum.Killed){
+				this.gameBoard.openCellsAroundShip(targetCell.ship);
+			}
+
+			if(this.gameBoard.allShipsAreKilled()){
+				this.finishGame();
+			}
+
+			return true;
+		}
+
+		return false;
+	}
 
 	private logBoard() {
 		let logBoard = this.gameBoard.gameBoard.map(row => row.map(cell => {

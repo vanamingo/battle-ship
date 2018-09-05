@@ -11,16 +11,41 @@ export class GameBoard {
 	gameBoard: IGameCell[][];
 	ships: Ship[] = [];
 
-	constructor(){
+	constructor() {
 		this.generateNewBoard();
 	}
 
-	allShipsAreKilled(){
-		return !this.ships.some(s => s.status !== ShipStatusEnum.Killed );
+	allShipsAreKilled() {
+		return !this.ships.some(s => s.status !== ShipStatusEnum.Killed);
 	}
 
-	getAllHiddenCells(){
+	getAllHiddenCells() {
 		return ([] as IGameCell[]).concat(...this.gameBoard).filter(c => !c.isOpened);
+	}
+
+	getCellsAroundFirstBrokenOpenCell(): IGameCell[] {
+		let brokenShip = this.ships.find(s => s.status === ShipStatusEnum.Broken);
+
+		if (brokenShip) {
+			let brokenCells = brokenShip.cells.filter(c => c.isOpened);
+			return this.getSurroundingCellsForArray(brokenCells)
+				.filter(c => !c.isOpened);
+		}
+
+		return null;
+	}
+
+	getSurroundingCellsForArray(cells: IGameCell[]): IGameCell[] {
+		let arr = cells.map(c => this.GetSurroundingCells(c.coordinate));
+		return ([] as IGameCell[]).concat(...arr);
+	}
+
+
+	openCellsAroundShip(ship: Ship) {
+		var arr = this.getSurroundingCellsForArray(ship.cells)
+			.filter(c => c && !c.isOpened && c instanceof EmptyCell)
+			.forEach(c => c.shoot());
+
 	}
 
 	private generateNewBoard(): IGameCell[][] {
@@ -69,7 +94,7 @@ export class GameBoard {
 		this.ships.push(ship);
 	}
 
-	private generateShip(offsetList: Array<Coordinate>): Ship{
+	private generateShip(offsetList: Array<Coordinate>): Ship {
 		let i = 0;
 		while (true) {
 			i++;
@@ -114,7 +139,8 @@ export class GameBoard {
 			.map(o => o.addCoordinates(coordinate))
 			.map(o => {
 				return o.isInBoardRange() ? this.gameBoard[o.X][o.Y] : null;
-			});
+			})
+			.filter(c => c);
 	}
 
 	private getRandomCellCoordinate(): Coordinate {
