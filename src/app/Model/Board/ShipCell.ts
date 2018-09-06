@@ -2,10 +2,9 @@
 import { CellStatusEnum } from "./CellStatusEnum";
 import { Ship } from "./Ship";
 import { Coordinate } from "./Coordinate";
-import { getRandomInt } from "../Utils/getRandomInt";
 
 export class ShipCell implements IGameCell{
-	cssNumber: number;
+	isOpenedByRobot: boolean;
 	isOpened: boolean = false;
 	status: CellStatusEnum= CellStatusEnum.Hidden;
 	ship: Ship;
@@ -19,6 +18,5 @@ export class ShipCell implements IGameCell{
 	}
 	constructor(coordinate: Coordinate){
 		this.coordinate = coordinate;
-		this.cssNumber = getRandomInt(1,3);
 	}
 }

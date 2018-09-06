@@ -2,7 +2,9 @@
   <div class="row" *ngFor="let row of game.gameBoard.gameBoard">
     <div 
     *ngFor="let cell of row" 
-    class="cell {{cell.status + cell.cssNumber}}" 
-    (click)="shoot(cell)" ></div>
+    
+    class="cell" >
+  <div app-game-cell [game]="game"  [cell]="cell"></div>
+  </div>
   </div>
 </div>

@@ -7,6 +7,5 @@ export interface IGameCell {
 	isOpened: boolean;
 	coordinate: Coordinate;
 
-
-	cssNumber: number; // TODO: make better solution. 
+	isOpenedByRobot: boolean;
 }

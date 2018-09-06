@@ -15,10 +15,5 @@ export class BoardComponent implements OnInit {
     this.game = new Game();
   }
 
-  shoot(targetCell: IGameCell){
-    console.log('Component shoot');
-    this.game.shoot(targetCell);
-  }
-
   game: Game
 }

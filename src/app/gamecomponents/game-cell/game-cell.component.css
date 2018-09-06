@@ -1,0 +1,23 @@
+.cell {
+    border: 1px solid #C6D6D5;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    vertical-align:middle;
+  
+    background-repeat: no-repeat;
+      background-size: 40px 40px;
+  }
+
+svg{
+    width: 40px;
+    height: 40px;   
+  }
+svg g{
+    fill:#0e397d;
+}
+
+.robot svg  g{
+    fill:#d11e1e;
+}
+  
