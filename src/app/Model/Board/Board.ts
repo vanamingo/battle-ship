@@ -12,7 +12,15 @@ export class GameBoard {
 	ships: Ship[] = [];
 
 	constructor() {
-		this.generateNewBoard();
+		/*
+		It is a rare case when the board generation algorith can't find a place for some ship. 
+		Regenerate the board in this case.
+		*/
+
+		do {
+			this.generateNewBoard();
+		} 
+		while (this.ships.some(s => !s))
 	}
 
 	allShipsAreKilled() {
@@ -24,6 +32,7 @@ export class GameBoard {
 	}
 
 	getCellsAroundFirstBrokenOpenCell(): IGameCell[] {
+		console.log('getCellsAroundFirstBrokenOpenCell ships = ', this.ships);
 		let brokenShip = this.ships.find(s => s.status === ShipStatusEnum.Broken);
 
 		if (brokenShip) {
@@ -49,6 +58,7 @@ export class GameBoard {
 	}
 
 	private generateNewBoard(): IGameCell[][] {
+		this.ships = [];
 		this.gameBoard = Array(10)
 			.fill(0)
 			.map(x => {
@@ -99,6 +109,7 @@ export class GameBoard {
 		while (true) {
 			i++;
 			if (i === 10) {
+				console.log('Can\'t find a place for a ship');
 				//TODO: handle this. 
 				// For example regenerate whole board.
 				return;
