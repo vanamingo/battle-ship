@@ -1,0 +1,14 @@
+<div class="row flex-center" *ngIf="isGameFinished()">
+  <div class="col-6col col" *ngIf="whoIsTheWinner() === 'robot'" >
+    <div class="alert alert-robot">Robot is the Winner!</div>
+  </div>
+  <div class="col-6col col" *ngIf="whoIsTheWinner() === 'user'">
+    <div class="alert alert-user">You! You are the Winner!</div>
+  </div>
+  <div class="col-6col col" *ngIf="whoIsTheWinner() === 'friendship'">
+    <div class="alert alert-friend">Friendship!!</div>
+  </div>
+  <div class="col-6col col">
+    <button class="btn-large">Restart</button>
+  </div>
+</div>

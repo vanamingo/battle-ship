@@ -1,0 +1,17 @@
+.alert-robot {
+    color: #ffffff;
+    border-color: #d11e1e;
+    background-color: #d65757;
+}
+
+.alert-user {
+    color: #ffffff;
+    border-color: #0e397d;
+    background-color: #2e4f85;
+}
+
+.alert-friend {
+    color: #ffffff;
+    border-color: #00a708;
+    background-color: #3fb33b;
+}
