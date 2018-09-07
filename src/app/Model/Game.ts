@@ -41,8 +41,9 @@ export class Game {
 
 		let targetCell = this.getTargetCellForRobot();
 		if(this.handleShoot(targetCell)){
-			this.statistics.UserShootHit++;
+			this.statistics.RobotShootHit++;
 			setTimeout(() => this.robotMakesHisShoot(), 500);
+			return;
 		}
 
 		this.isRobotTurn = false;
