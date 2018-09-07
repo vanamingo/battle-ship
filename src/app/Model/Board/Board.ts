@@ -32,7 +32,7 @@ export class GameBoard {
 	}
 
 	getCellsAroundFirstBrokenOpenCell(): IGameCell[] {
-		console.log('getCellsAroundFirstBrokenOpenCell ships = ', this.ships);
+		//console.log('getCellsAroundFirstBrokenOpenCell ships = ', this.ships);
 		let brokenShip = this.ships.find(s => s.status === ShipStatusEnum.Broken);
 
 		if (brokenShip) {
@@ -109,7 +109,7 @@ export class GameBoard {
 		while (true) {
 			i++;
 			if (i === 10) {
-				console.log('Can\'t find a place for a ship');
+				//console.log('Can\'t find a place for a ship');
 				//TODO: handle this. 
 				// For example regenerate whole board.
 				return;

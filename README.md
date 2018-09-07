@@ -1,27 +1,25 @@
-# MyApp
+#Battle Ship. 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
+You can play it online here:  https://vanamingo.github.io/
 
-## Development server
+To run it localy: 
+Briefly: 
+Run `ng serve --open` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+Detailed
+* Checkout this repository 
+* Install Node JS (https://nodejs.org)
+* Open the project folder in the console
+* Run command `npm i` (it installs the project dependencies in the local node_modules folder)
+* Run command `npm install -g @angular/cli`. It installs the Angular CLI globally.
+* Run command `ng serve --open` - it runs the server + opens browser. 
+* Navigate to `http://localhost:4200/`.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## Some enemy robot details
+The robot has the following strategy: 
+If there is some partly damaged ship then robot selects random cell close to such ship. In other case it selects random cell from whole board.  
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Debug 
+The browser developer console (Press F12 for Chrome/ Firefox / IE...) contains a table with ships locations. 
