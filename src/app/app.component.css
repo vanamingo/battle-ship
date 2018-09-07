@@ -1,3 +1,15 @@
 h2{
     margin: 10px;
 }
+
+app-player-card {
+    border-width: 4px;
+}
+
+.user-card{
+    border-color:#0e397d;
+}
+
+.robot-card{
+    border-color:#d11e1e;
+}

@@ -1,9 +1,20 @@
 ﻿<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
   <h2>
-    Welcome to {{ title }}!
+    Welcome to MaxMax's Battle Ship!!
   </h2>
-  <app-board></app-board>
+  <div class="row flex-spaces">
+    <div app-player-card name="You" logo="(-_-(-_-)-_-)" statisticsField="UserShootHit" [game]="game" class="col-2 col border border-4 user-card">
+    </div>
+    <div class="col-6col ">
+      <app-board [game]="game"></app-board>
+    </div>
+    <div app-player-card name="Robot" logo="¯\_(ツ)_/¯" statisticsField="RobotShootHit" [game]="game" class="col-2 col border border-4 robot-card">
+
+    </div>
+  </div>
 </div>
+<div class="row flex-center">
 
 
+</div>

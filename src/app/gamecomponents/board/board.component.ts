@@ -1,4 +1,4 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, Input } from '@angular/core';
 import { Game } from 'src/app/Model/Game';
 import { IGameCell } from '../../Model/Board/IGameCell';
 
@@ -8,12 +8,11 @@ import { IGameCell } from '../../Model/Board/IGameCell';
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit {
-
+  @Input() game: Game
   constructor() { }
 
-  ngOnInit() {
-    this.game = new Game();
+  ngOnInit() {   
   }
 
-  game: Game
+
 }
