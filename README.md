@@ -1,6 +1,14 @@
 # Battle Ship. 
 You can play it online here:  https://vanamingo.github.io/
 The application is based on the latest version of Angular (September 2018).  
+
+## Some enemy robot details
+The robot has the following strategy: 
+If there is some partly damaged ship then robot selects random cell close to such ship. In other case it selects random cell from whole board.  
+
+## Very useful information 
+The browser developer console (Press F12 for Chrome/ Firefox / IE...) contains a table with ships locations. 
+
 ## To run it localy
 Briefly: 
 
@@ -15,11 +23,3 @@ Detailed
 * Run command `npm install -g @angular/cli`. It installs the Angular CLI globally.
 * Run command `ng serve --open` - it runs the server + opens browser. 
 * Navigate to `http://localhost:4200/`.
-
-
-## Some enemy robot details
-The robot has the following strategy: 
-If there is some partly damaged ship then robot selects random cell close to such ship. In other case it selects random cell from whole board.  
-
-## Debug 
-The browser developer console (Press F12 for Chrome/ Firefox / IE...) contains a table with ships locations. 
