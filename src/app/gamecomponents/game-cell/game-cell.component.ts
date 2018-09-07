@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IGameCell } from '../../Model/Board/IGameCell';
-import { ShipCell } from '../../Model/Board/ShipCell';
 import { getRandomInt } from '../../Model/Utils/getRandomInt';
 import { CellStatusEnum } from '../../Model/Board/CellStatusEnum';
 import { Game } from '../../Model/Game';

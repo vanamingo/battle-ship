@@ -14,11 +14,6 @@ export class AppComponent {
   constructor() { }
 
   ngOnInit() { 
-    this.startGame();
-  }
-
-  startGame(){
-    console.log('startGame');
     this.game = new Game();  
   }
 }
