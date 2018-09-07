@@ -1,9 +1,9 @@
 # Battle Ship. 
-
 You can play it online here:  https://vanamingo.github.io/
-
+The application is based on the latest version of Angular (September 2018).  
 ## To run it localy
 Briefly: 
+
 Run `ng serve --open` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 
