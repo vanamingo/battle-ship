@@ -2,7 +2,7 @@ h2{
     margin: 10px;
 }
 
-app-player-card {
+[app-player-card] {
     border-width: 4px;
 }
 
