@@ -6,16 +6,22 @@ import { getRandomInt } from "./Utils/getRandomInt";
 import { ShipStatusEnum } from "./Board/ShipStatusEnum";
 
 export class Game {
-	readonly gameBoard: GameBoard
+	gameBoard: GameBoard
 
-	isRobotTurn: boolean = false;
-	isGameFinished: boolean = false;
+	isRobotTurn: boolean;
+	isGameFinished: boolean;
 
 	statistics: Statistics;
 
 	constructor() {
-		this.gameBoard =new GameBoard();
-		this.statistics = new Statistics(); 
+		this.startNewGame();
+	}
+
+	startNewGame() {
+		this.isRobotTurn = false;
+		this.isGameFinished = false;
+		this.gameBoard = new GameBoard();
+		this.statistics = new Statistics();
 		this.logBoard();
 	}
 
@@ -24,7 +30,7 @@ export class Game {
 			return;
 		}
 
-		if(this.handleShoot(targetCell)){
+		if (this.handleShoot(targetCell)) {
 			this.statistics.UserShootHit++;
 			return;
 		}
@@ -40,7 +46,7 @@ export class Game {
 	private robotMakesHisShoot(): void {
 
 		let targetCell = this.getTargetCellForRobot();
-		if(this.handleShoot(targetCell)){
+		if (this.handleShoot(targetCell)) {
 			this.statistics.RobotShootHit++;
 			setTimeout(() => this.robotMakesHisShoot(), 500);
 			return;
@@ -49,10 +55,10 @@ export class Game {
 		this.isRobotTurn = false;
 	}
 
-	private getTargetCellForRobot(): IGameCell{
+	private getTargetCellForRobot(): IGameCell {
 		let cellsAroundSomeBrokenCell = this.gameBoard.getCellsAroundFirstBrokenOpenCell();
 
-		if(cellsAroundSomeBrokenCell){
+		if (cellsAroundSomeBrokenCell) {
 			let index = getRandomInt(0, cellsAroundSomeBrokenCell.length - 1);
 			return cellsAroundSomeBrokenCell[index];
 		}
@@ -63,16 +69,16 @@ export class Game {
 		return hiddenCells[hiddenCellIndex];
 	}
 
-	private handleShoot(targetCell: IGameCell): boolean{
-		targetCell.shoot();		
+	private handleShoot(targetCell: IGameCell): boolean {
+		targetCell.shoot();
 		targetCell.isOpenedByRobot = this.isRobotTurn;
-		console.log('targetCell.isOpenedByRobot = this.isRobotTurn;',targetCell.isOpenedByRobot );
-		if (targetCell instanceof ShipCell) {	
-			if(targetCell.ship.status === ShipStatusEnum.Killed){
+		console.log('targetCell.isOpenedByRobot = this.isRobotTurn;', targetCell.isOpenedByRobot);
+		if (targetCell instanceof ShipCell) {
+			if (targetCell.ship.status === ShipStatusEnum.Killed) {
 				this.gameBoard.openCellsAroundShip(targetCell.ship);
 			}
 
-			if(this.gameBoard.allShipsAreKilled()){
+			if (this.gameBoard.allShipsAreKilled()) {
 				this.finishGame();
 			}
 

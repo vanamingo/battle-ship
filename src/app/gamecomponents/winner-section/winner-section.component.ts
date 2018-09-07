@@ -8,7 +8,7 @@ import { Game } from '../../Model/Game';
 })
 export class WinnerSectionComponent implements OnInit {
   @Input() game: Game
-
+  @Input() restartHandler
   constructor() { }
 
   isGameFinished(): boolean{
@@ -26,6 +26,10 @@ export class WinnerSectionComponent implements OnInit {
     }
 
     return "friendship";
+  }
+
+  restartGame(){
+    this.game.startNewGame();
   }
 
   ngOnInit() {
