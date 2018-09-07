@@ -20,4 +20,8 @@ svg g{
 .robot svg  g{
     fill:#d11e1e;
 }
+
+.killed{
+    background-color: rgb(225, 225, 225);
+}
   

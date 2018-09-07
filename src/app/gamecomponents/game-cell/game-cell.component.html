@@ -1,4 +1,4 @@
-<div (click)="shoot(cell)" class="cell max {{cell.isOpenedByRobot ? 'robot' : ''}}">
+<div (click)="shoot(cell)" class="cell max {{cell.isOpenedByRobot ? 'robot' : ''}} {{cell.status === 'killed' ? 'killed' : ''}}">
     <svg *ngIf="cssNumber === 1 && getIconType() === 'cross'" version="1.0" xmlns="http://www.w3.org/2000/svg" width="47.000000pt" height="47.000000pt" viewBox="0 0 47.000000 47.000000"
         preserveAspectRatio="xMidYMid meet">
         <g transform="translate(0.000000,47.000000) scale(0.100000,-0.100000)" fill="#0e397d" stroke="none">
