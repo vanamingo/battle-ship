@@ -1,6 +1,6 @@
-﻿export enum CellStatusEnum {
-	Hidden = "hidden", 
-	Missed = "missed",
-	Broken = "broken",
-	Killed = "killed"
+export enum CellStatusEnum {
+	Hidden = 'hidden',
+	Missed = 'missed',
+	Broken = 'broken',
+	Killed = 'killed'
 }

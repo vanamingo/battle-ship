@@ -1,12 +1,12 @@
-﻿import { IGameCell } from "./Board/IGameCell";
-import { ShipCell } from "./Board/ShipCell";
-import { GameBoard } from "./Board/Board";
-import { Statistics } from "./Game/Statistics";
-import { getRandomInt } from "./Utils/getRandomInt";
-import { ShipStatusEnum } from "./Board/ShipStatusEnum";
+import { IGameCell } from './Board/IGameCell';
+import { ShipCell } from './Board/ShipCell';
+import { GameBoard } from './Board/Board';
+import { Statistics } from './Game/Statistics';
+import { getRandomInt } from './Utils/getRandomInt';
+import { ShipStatusEnum } from './Board/ShipStatusEnum';
 
 export class Game {
-	gameBoard: GameBoard
+	gameBoard: GameBoard;
 
 	isRobotTurn: boolean;
 	isGameFinished: boolean;
@@ -45,7 +45,7 @@ export class Game {
 	}
 	private robotMakesHisShoot(): void {
 
-		let targetCell = this.getTargetCellForRobot();
+		const targetCell = this.getTargetCellForRobot();
 		if (this.handleShoot(targetCell)) {
 			this.statistics.RobotShootHit++;
 			setTimeout(() => this.robotMakesHisShoot(), 500);
@@ -56,15 +56,15 @@ export class Game {
 	}
 
 	private getTargetCellForRobot(): IGameCell {
-		let cellsAroundSomeBrokenCell = this.gameBoard.getCellsAroundFirstBrokenOpenCell();
+		const cellsAroundSomeBrokenCell = this.gameBoard.getCellsAroundFirstBrokenOpenCell();
 
 		if (cellsAroundSomeBrokenCell) {
-			let index = getRandomInt(0, cellsAroundSomeBrokenCell.length - 1);
+			const index = getRandomInt(0, cellsAroundSomeBrokenCell.length - 1);
 			return cellsAroundSomeBrokenCell[index];
 		}
 
-		let hiddenCells = this.gameBoard.getAllHiddenCells();
-		let hiddenCellIndex = getRandomInt(0, hiddenCells.length - 1);
+		const hiddenCells = this.gameBoard.getAllHiddenCells();
+		const hiddenCellIndex = getRandomInt(0, hiddenCells.length - 1);
 
 		return hiddenCells[hiddenCellIndex];
 	}
@@ -89,7 +89,7 @@ export class Game {
 	}
 
 	private logBoard() {
-		let logBoard = this.gameBoard.gameBoard.map(row => row.map(cell => {
+		const logBoard = this.gameBoard.gameBoard.map(row => row.map(cell => {
 			return cell instanceof ShipCell ? 'X' : '';
 		}).reduce(function (previousValue, currentValue, index) {
 

@@ -7,28 +7,28 @@ import { Game } from '../../Model/Game';
   styleUrls: ['./winner-section.component.css']
 })
 export class WinnerSectionComponent implements OnInit {
-  @Input() game: Game
-  @Input() restartHandler
+  @Input() game: Game;
+  @Input() restartHandler;
   constructor() { }
 
-  isGameFinished(): boolean{
+  isGameFinished(): boolean {
     return this.game.isGameFinished;
   }
 
-  whoIsTheWinner(){
-    let stat = this.game.statistics;
-    if(stat.RobotShootHit > stat.UserShootHit){
-      return "robot";
-    }
-    
-    if(stat.RobotShootHit < stat.UserShootHit){
-      return "user";
+  whoIsTheWinner() {
+    const stat = this.game.statistics;
+    if (stat.RobotShootHit > stat.UserShootHit) {
+      return 'robot';
     }
 
-    return "friendship";
+    if (stat.RobotShootHit < stat.UserShootHit) {
+      return 'user';
+    }
+
+    return 'friendship';
   }
 
-  restartGame(){
+  restartGame() {
     this.game.startNewGame();
   }
 

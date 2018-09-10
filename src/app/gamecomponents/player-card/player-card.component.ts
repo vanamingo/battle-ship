@@ -8,11 +8,11 @@ import { Game } from '../../Model/Game';
   styleUrls: ['./player-card.component.css']
 })
 export class PlayerCardComponent implements OnInit {
-  @Input() statistics: Statistics
-  @Input() name: string
-  @Input() logo: string
-  @Input() statisticsField: string
-  @Input() game: Game
+  @Input() statistics: Statistics;
+  @Input() name: string;
+  @Input() logo: string;
+  @Input() statisticsField: string;
+  @Input() game: Game;
 
   constructor() { }
 

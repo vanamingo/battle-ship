@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+import { Component } from '@angular/core';
 import { Game } from './Model/Game';
 
 @Component({
@@ -10,10 +10,10 @@ import { Game } from './Model/Game';
 
 export class AppComponent {
 
-  game: Game
+  game: Game;
   constructor() { }
 
-  ngOnInit() { 
-    this.game = new Game();  
+  ngOnInit() {
+    this.game = new Game();
   }
 }

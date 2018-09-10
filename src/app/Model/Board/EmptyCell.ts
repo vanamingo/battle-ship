@@ -1,13 +1,13 @@
-﻿import { IGameCell } from "./IGameCell";
-import { CellStatusEnum } from "./CellStatusEnum";
-import { Coordinate } from "./Coordinate";
+import { IGameCell } from './IGameCell';
+import { CellStatusEnum } from './CellStatusEnum';
+import { Coordinate } from './Coordinate';
 
-export class EmptyCell implements IGameCell{
+export class EmptyCell implements IGameCell {
 	isOpenedByRobot: boolean;
 	coordinate: Coordinate;
-	isOpened: boolean = false;
+	isOpened = false;
 	status: CellStatusEnum = CellStatusEnum.Hidden;
-	constructor(coordinate: Coordinate){
+	constructor(coordinate: Coordinate) {
 		this.coordinate = coordinate;
 	}
 	shoot(): boolean {

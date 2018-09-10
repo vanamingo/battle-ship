@@ -1,4 +1,4 @@
-export class Statistics{
-    UserShootHit: number = 0;
-    RobotShootHit: number = 0;    
+export class Statistics {
+    UserShootHit = 0;
+    RobotShootHit = 0;
 }

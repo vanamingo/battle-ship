@@ -11,31 +11,31 @@ import { Game } from '../../Model/Game';
 })
 export class GameCellComponent implements OnInit {
 
-  @Input() cell: IGameCell
-  @Input() game: Game
-  
-  shoot(targetCell: IGameCell){
+  @Input() cell: IGameCell;
+  @Input() game: Game;
+
+  shoot(targetCell: IGameCell) {
    // console.log('Component shoot');
     this.game.shoot(targetCell);
   }
-  
+
   cssNumber: number;
 
-  getIconType(): string{
-    let status = this.cell.status; 
-    if(status === CellStatusEnum.Broken || status === CellStatusEnum.Killed ){
+  getIconType(): string {
+    const status = this.cell.status;
+    if (status === CellStatusEnum.Broken || status === CellStatusEnum.Killed ) {
       return 'cross';
     }
 
     return status;
   }
 
-  isRobot(): boolean{
+  isRobot(): boolean {
     return this.cell.isOpenedByRobot;
   }
 
-  constructor() { 
-    this.cssNumber = getRandomInt(1,3);
+  constructor() {
+    this.cssNumber = getRandomInt(1, 3);
   }
 
   ngOnInit() {

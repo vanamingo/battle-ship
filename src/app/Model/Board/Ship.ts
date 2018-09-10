@@ -1,18 +1,18 @@
-import { ShipCell } from "./ShipCell";
-import { ShipStatusEnum } from "./ShipStatusEnum";
-import { CellStatusEnum } from "./CellStatusEnum";
+import { ShipCell } from './ShipCell';
+import { ShipStatusEnum } from './ShipStatusEnum';
+import { CellStatusEnum } from './CellStatusEnum';
 
-export class Ship{
-    readonly cells: ShipCell[]
+export class Ship {
+    readonly cells: ShipCell[];
     status: ShipStatusEnum = ShipStatusEnum.Ok;
 
-    constructor(shipCells: ShipCell[]){
+    constructor(shipCells: ShipCell[]) {
         this.cells = shipCells;
         this.cells.forEach(c => c.ship = this);
     }
 
-    catchShoot(cell: ShipCell){
-        if(!this.cells.includes(cell)){
+    catchShoot(cell: ShipCell) {
+        if (!this.cells.includes(cell)) {
             console.log('!!! this.cells.includes(cell) ERROR');
         }
 
@@ -24,11 +24,11 @@ export class Ship{
         if (this.cells.every(c => c.isOpened)) {
             this.status = ShipStatusEnum.Killed;
 
-            this.cells.forEach(c => {c.status = CellStatusEnum.Killed});
+            this.cells.forEach(c => {c.status = CellStatusEnum.Killed; });
             return;
         }
 
-        if(this.cells.some(c => c.isOpened)){
+        if (this.cells.some(c => c.isOpened)) {
             this.status = ShipStatusEnum.Broken;
             return;
         }

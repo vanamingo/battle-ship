@@ -1,11 +1,11 @@
-﻿import { IGameCell } from "./IGameCell";
-import { EmptyCell } from "./EmptyCell";
-import { ShipCell } from "./ShipCell";
-import { Ship } from "./Ship";
+import { IGameCell } from './IGameCell';
+import { EmptyCell } from './EmptyCell';
+import { ShipCell } from './ShipCell';
+import { Ship } from './Ship';
 import { Coordinate } from './Coordinate';
-import { Offsets } from "./Offsets";
-import { ShipStatusEnum } from "./ShipStatusEnum";
-import { getRandomInt } from "../Utils/getRandomInt";
+import { Offsets } from './Offsets';
+import { ShipStatusEnum } from './ShipStatusEnum';
+import { getRandomInt } from '../Utils/getRandomInt';
 
 export class GameBoard {
 	gameBoard: IGameCell[][];
@@ -13,14 +13,14 @@ export class GameBoard {
 
 	constructor() {
 		/*
-		It is a rare case when the board generation algorith can't find a place for some ship. 
+		It is a rare case when the board generation algorith can't find a place for some ship.
 		Regenerate the board in this case.
 		*/
 
 		do {
 			this.generateNewBoard();
-		} 
-		while (this.ships.some(s => !s))
+		}
+		while (this.ships.some(s => !s));
 	}
 
 	allShipsAreKilled() {
@@ -33,10 +33,10 @@ export class GameBoard {
 
 	getCellsAroundFirstBrokenOpenCell(): IGameCell[] {
 		//console.log('getCellsAroundFirstBrokenOpenCell ships = ', this.ships);
-		let brokenShip = this.ships.find(s => s.status === ShipStatusEnum.Broken);
+		const brokenShip = this.ships.find(s => s.status === ShipStatusEnum.Broken);
 
 		if (brokenShip) {
-			let brokenCells = brokenShip.cells.filter(c => c.isOpened);
+			const brokenCells = brokenShip.cells.filter(c => c.isOpened);
 			return this.getSurroundingCellsForArray(brokenCells)
 				.filter(c => !c.isOpened);
 		}
@@ -45,13 +45,13 @@ export class GameBoard {
 	}
 
 	getSurroundingCellsForArray(cells: IGameCell[]): IGameCell[] {
-		let arr = cells.map(c => this.GetSurroundingCells(c.coordinate));
+		const arr = cells.map(c => this.GetSurroundingCells(c.coordinate));
 		return ([] as IGameCell[]).concat(...arr);
 	}
 
 
 	openCellsAroundShip(ship: Ship) {
-		var arr = this.getSurroundingCellsForArray(ship.cells)
+		const arr = this.getSurroundingCellsForArray(ship.cells)
 			.filter(c => c && !c.isOpened && c instanceof EmptyCell)
 			.forEach(c => c.shoot());
 
@@ -65,7 +65,7 @@ export class GameBoard {
 				let k = 0;
 				return Array(10).fill(0).map(x => {
 					let p = 0;
-					return new EmptyCell(new Coordinate(k++, p++))
+					return new EmptyCell(new Coordinate(k++, p++));
 				});
 			});
 
@@ -78,29 +78,29 @@ export class GameBoard {
 	}
 
 	private addRandomShipL() {
-		//TODO: move to field. Set in constructor. 
-		let offsetSet = Offsets.getShipLVariants();
-		let offset = offsetSet[getRandomInt(0, 7)];
+		//TODO: move to field. Set in constructor.
+		const offsetSet = Offsets.getShipLVariants();
+		const offset = offsetSet[getRandomInt(0, 7)];
 
-		let ship = this.generateShip(offset);
+		const ship = this.generateShip(offset);
 		this.ships.push(ship);
 	}
 
 	private addRandomShipDot() {
-		//TODO: move to field. Set in constructor. 
-		let offsetSet = Offsets.getShipDotVariants();
+		//TODO: move to field. Set in constructor.
+		const offsetSet = Offsets.getShipDotVariants();
 
-		let offset = offsetSet[0];
-		let ship = this.generateShip(offset);
+		const offset = offsetSet[0];
+		const ship = this.generateShip(offset);
 		this.ships.push(ship);
 	}
 
 	private addRandomShipI() {
-		//TODO: move to field. Set in constructor. 
-		let offsetSet = Offsets.getShipIVariants();
+		//TODO: move to field. Set in constructor.
+		const offsetSet = Offsets.getShipIVariants();
 
-		let offset = offsetSet[getRandomInt(0, 1)];
-		let ship = this.generateShip(offset);
+		const offset = offsetSet[getRandomInt(0, 1)];
+		const ship = this.generateShip(offset);
 		this.ships.push(ship);
 	}
 
@@ -110,13 +110,13 @@ export class GameBoard {
 			i++;
 			if (i === 10) {
 				//console.log('Can\'t find a place for a ship');
-				//TODO: handle this. 
+				//TODO: handle this.
 				// For example regenerate whole board.
 				return;
 			}
 
-			let startCoordinate = this.getRandomCellCoordinate();
-			let shipCells = offsetList.map(o => { return new ShipCell(startCoordinate.addCoordinates(o)); });
+			const startCoordinate = this.getRandomCellCoordinate();
+			const shipCells = offsetList.map(o => new ShipCell(startCoordinate.addCoordinates(o)));
 
 			if (shipCells.some(c => !this.isValidShipCell(c.coordinate))) {
 				//console.log('shipCoordinates are invalid', shipCoordinates);
@@ -139,7 +139,7 @@ export class GameBoard {
 			return false;
 		}
 
-		let surroundingCells = this.GetSurroundingCells(coordinate);
+		const surroundingCells = this.GetSurroundingCells(coordinate);
 		return surroundingCells.every(c => {
 			return !c || c instanceof EmptyCell;
 		});
