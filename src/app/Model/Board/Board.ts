@@ -8,6 +8,7 @@ import { ShipStatusEnum } from './ShipStatusEnum';
 import { getRandomInt } from '../Utils/getRandomInt';
 
 export class GameBoard {
+
 	gameBoard: IGameCell[][];
 	ships: Ship[] = [];
 
@@ -62,7 +63,7 @@ export class GameBoard {
 			.fill(0)
 			.map(x => {
 				let k = 0;
-				return Array(10).fill(0).map(x => {
+				return Array(10).fill(0).map(_ => {
 					let p = 0;
 					return new EmptyCell(new Coordinate(k++, p++));
 				});
@@ -77,7 +78,6 @@ export class GameBoard {
 	}
 
 	private addRandomShipL() {
-		//TODO: move to field. Set in constructor.
 		const offsetSet = Offsets.getShipLVariants();
 		const offset = offsetSet[getRandomInt(0, 7)];
 
@@ -86,7 +86,6 @@ export class GameBoard {
 	}
 
 	private addRandomShipDot() {
-		//TODO: move to field. Set in constructor.
 		const offsetSet = Offsets.getShipDotVariants();
 
 		const offset = offsetSet[0];
@@ -95,7 +94,6 @@ export class GameBoard {
 	}
 
 	private addRandomShipI() {
-		//TODO: move to field. Set in constructor.
 		const offsetSet = Offsets.getShipIVariants();
 
 		const offset = offsetSet[getRandomInt(0, 1)];

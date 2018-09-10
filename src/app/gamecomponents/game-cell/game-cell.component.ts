@@ -14,11 +14,11 @@ export class GameCellComponent implements OnInit {
   @Input() cell: IGameCell;
   @Input() game: Game;
 
+  cssNumber: number;
+
   shoot(targetCell: IGameCell) {
     this.game.shoot(targetCell);
   }
-
-  cssNumber: number;
 
   getIconType(): string {
     const status = this.cell.status;
@@ -38,6 +38,5 @@ export class GameCellComponent implements OnInit {
   }
 
   ngOnInit() {
-
   }
 }
