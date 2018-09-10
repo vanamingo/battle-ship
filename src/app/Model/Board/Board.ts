@@ -6,6 +6,7 @@ import { Coordinate } from './Coordinate';
 import { Offsets } from './Offsets';
 import { ShipStatusEnum } from './ShipStatusEnum';
 import { getRandomInt } from '../Utils/getRandomInt';
+import { CoordinateLimits } from './CoordinateLimits';
 
 export class GameBoard {
 
@@ -13,11 +14,6 @@ export class GameBoard {
 	ships: Ship[] = [];
 
 	constructor() {
-		/*
-		It is a rare case when the board generation algorith can't find a place for some ship.
-		Regenerate the board in this case.
-		*/
-
 		do {
 			this.generateNewBoard();
 		}
@@ -146,6 +142,6 @@ export class GameBoard {
 	}
 
 	private getRandomCellCoordinate(): Coordinate {
-		return new Coordinate(getRandomInt(0, 9), getRandomInt(0, 9));
+		return new Coordinate(getRandomInt(0, CoordinateLimits.XMax), getRandomInt(0, CoordinateLimits.YMax));
 	}
 }

@@ -1,3 +1,4 @@
+import { CoordinateLimits } from "./CoordinateLimits";
 
 export class Coordinate {
 	constructor(X: number, Y: number) {
@@ -18,7 +19,7 @@ export class Coordinate {
 	}
 
 	isInBoardRange(): boolean {
-		return 0 <= this.X && this.X <= 9 && 0 <= this.Y && this.Y <= 9;
+		return 0 <= this.X && this.X <= CoordinateLimits.XMax && 0 <= this.Y && this.Y <= CoordinateLimits.YMax;
 	}
 
 	reverse(): Coordinate {
