@@ -10,7 +10,6 @@ export class ShipCell implements IGameCell {
 	ship: Ship;
 	coordinate: Coordinate;
 	shoot(): boolean {
-		//console.log('ShipCell shoot');
 		this.isOpened = true;
 		this.ship.catchShoot(this);
 

@@ -12,10 +12,6 @@ export class Ship {
     }
 
     catchShoot(cell: ShipCell) {
-        if (!this.cells.includes(cell)) {
-            console.log('!!! this.cells.includes(cell) ERROR');
-        }
-
         cell.status  = CellStatusEnum.Broken;
         this.recalcStatus();
     }

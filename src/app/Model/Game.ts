@@ -72,7 +72,6 @@ export class Game {
 	private handleShoot(targetCell: IGameCell): boolean {
 		targetCell.shoot();
 		targetCell.isOpenedByRobot = this.isRobotTurn;
-		console.log('targetCell.isOpenedByRobot = this.isRobotTurn;', targetCell.isOpenedByRobot);
 		if (targetCell instanceof ShipCell) {
 			if (targetCell.ship.status === ShipStatusEnum.Killed) {
 				this.gameBoard.openCellsAroundShip(targetCell.ship);

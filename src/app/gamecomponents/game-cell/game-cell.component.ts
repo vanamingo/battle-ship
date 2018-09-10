@@ -15,7 +15,6 @@ export class GameCellComponent implements OnInit {
   @Input() game: Game;
 
   shoot(targetCell: IGameCell) {
-   // console.log('Component shoot');
     this.game.shoot(targetCell);
   }
 
