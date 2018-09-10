@@ -57,11 +57,9 @@ export class GameBoard {
 		this.ships = [];
 		this.gameBoard = Array(10)
 			.fill(0)
-			.map(x => {
-				let k = 0;
-				return Array(10).fill(0).map(_ => {
-					let p = 0;
-					return new EmptyCell(new Coordinate(k++, p++));
+			.map((k: number, y: number) => {
+				return Array(10).fill(0).map((p: number,x: number) => {
+					return new EmptyCell(new Coordinate(x,y));
 				});
 			});
 
@@ -96,14 +94,17 @@ export class GameBoard {
 	}
 
 	private generateShip(offsetList: Array<Coordinate>): Ship {
-		let i = 0;
-		while (true) {
-			i++;
-			if (i === 10) {
-				return;
+		const emptyCellsInRandomOrder = this.getAllEmptyCellsInRandomOrder();
+
+		while(true) {
+			let index = getRandomInt(0, emptyCellsInRandomOrder.length - 1);
+			let startCoordinate = emptyCellsInRandomOrder[index];
+			emptyCellsInRandomOrder.splice(index, 1);
+			
+			if(!startCoordinate){
+				return null;
 			}
 
-			const startCoordinate = this.getRandomCellCoordinate();
 			const shipCells = offsetList.map(o => new ShipCell(startCoordinate.addCoordinates(o)));
 
 			if (shipCells.some(c => !this.isValidShipCell(c.coordinate))) {
@@ -141,7 +142,11 @@ export class GameBoard {
 			.filter(c => c);
 	}
 
-	private getRandomCellCoordinate(): Coordinate {
-		return new Coordinate(getRandomInt(0, CoordinateLimits.XMax), getRandomInt(0, CoordinateLimits.YMax));
+	private getAllEmptyCellsInRandomOrder(): Coordinate[] {
+		return ([] as IGameCell[])
+		.concat(...this.gameBoard)
+		.filter(c => c instanceof EmptyCell)
+		.map(c => c.coordinate)
+		.sort(function(a, b){return 0.5 - Math.random()});
 	}
 }
