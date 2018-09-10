@@ -70,7 +70,6 @@ export class GameBoard {
 			});
 
 		this.addRandomShipL();
-		this.addRandomShipL();
 		this.addRandomShipI();
 		this.addRandomShipDot();
 		this.addRandomShipDot();
@@ -79,7 +78,8 @@ export class GameBoard {
 
 	private addRandomShipL() {
 		const offsetSet = Offsets.getShipLVariants();
-		const offset = offsetSet[getRandomInt(0, 7)];
+		//const offset = offsetSet[getRandomInt(0, 3)];
+		const offset = offsetSet[0];
 
 		const ship = this.generateShip(offset);
 		this.ships.push(ship);
