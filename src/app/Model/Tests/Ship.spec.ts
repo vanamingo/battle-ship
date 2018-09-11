@@ -7,7 +7,7 @@ describe('Ship', () => {
     let ship: Ship;
 
     beforeEach(() => {
-        ship = TestDataFactory.getLShip();
+        ship = TestDataFactory.getShip1();
     });
 
     it('has initial status OK', () => {

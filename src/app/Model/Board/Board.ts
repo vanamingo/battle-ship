@@ -13,7 +13,13 @@ export class GameBoard {
     gameBoard: IGameCell[][];
     ships: Ship[] = [];
 
-    constructor() {
+    constructor(gameBoard?: IGameCell[][], ships?: Ship[]) {        
+        if(gameBoard && ships){
+            this.gameBoard = gameBoard;
+            this.ships = ships;
+            return;
+        }
+
         do {
             this.generateNewBoard();
         }
@@ -41,7 +47,7 @@ export class GameBoard {
     }
 
     getSurroundingCellsForArray(cells: IGameCell[]): IGameCell[] {
-        const arr = cells.map(c => this.GetSurroundingCells(c.coordinate));
+        const arr = cells.map(c => this.getSurroundingCells(c.coordinate));
         return ([] as IGameCell[]).concat(...arr);
     }
 
@@ -52,12 +58,40 @@ export class GameBoard {
 
     }
 
+    isValidShipCell(coordinate: Coordinate): boolean {
+        if (!coordinate.isInBoardRange()) {
+            return false;
+        }
+
+        const surroundingCells = this.getSurroundingCells(coordinate);
+        return surroundingCells.every(c => {
+            return !c || c instanceof EmptyCell;
+        });
+    }
+
+    getSurroundingCells(coordinate: Coordinate): Array<IGameCell> {
+        return Offsets.surroundingOffset
+            .map(o => o.addCoordinates(coordinate))
+            .map(o => {
+                return o.isInBoardRange() ? this.gameBoard[o.X][o.Y] : null;
+            })
+            .filter(c => c);
+    }
+
+    private getAllEmptyCellsInRandomOrder(): Coordinate[] {
+        return ([] as IGameCell[])
+        .concat(...this.gameBoard)
+        .filter(c => c instanceof EmptyCell)
+        .map(c => c.coordinate)
+        .sort(function(a, b) {return 0.5 - Math.random(); });
+    }
+
     private generateNewBoard(): IGameCell[][] {
         this.ships = [];
-        this.gameBoard = Array(10)
+        this.gameBoard = Array(CoordinateLimits.YMax + 1)
             .fill(0)
             .map((k: number, y: number) => {
-                return Array(10).fill(0).map((p: number, x: number) => {
+                return Array(CoordinateLimits.XMax + 1).fill(0).map((p: number, x: number) => {
                     return new EmptyCell(new Coordinate(x, y));
                 });
             });
@@ -117,33 +151,5 @@ export class GameBoard {
             return new Ship(shipCells);
         }
 
-    }
-
-    private isValidShipCell(coordinate: Coordinate): boolean {
-        if (!coordinate.isInBoardRange()) {
-            return false;
-        }
-
-        const surroundingCells = this.GetSurroundingCells(coordinate);
-        return surroundingCells.every(c => {
-            return !c || c instanceof EmptyCell;
-        });
-    }
-
-    private GetSurroundingCells(coordinate: Coordinate): Array<IGameCell> {
-        return Offsets.surroundingOffset
-            .map(o => o.addCoordinates(coordinate))
-            .map(o => {
-                return o.isInBoardRange() ? this.gameBoard[o.X][o.Y] : null;
-            })
-            .filter(c => c);
-    }
-
-    private getAllEmptyCellsInRandomOrder(): Coordinate[] {
-        return ([] as IGameCell[])
-        .concat(...this.gameBoard)
-        .filter(c => c instanceof EmptyCell)
-        .map(c => c.coordinate)
-        .sort(function(a, b) {return 0.5 - Math.random(); });
     }
 }
