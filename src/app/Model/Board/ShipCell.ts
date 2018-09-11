@@ -4,18 +4,18 @@ import { Ship } from './Ship';
 import { Coordinate } from './Coordinate';
 
 export class ShipCell implements IGameCell {
-	isOpenedByRobot: boolean;
-	isOpened = false;
-	status: CellStatusEnum = CellStatusEnum.Hidden;
-	ship: Ship;
-	coordinate: Coordinate;
-	shoot(): boolean {
-		this.isOpened = true;
-		this.ship.catchShoot(this);
+    isOpenedByRobot: boolean;
+    isOpened = false;
+    status: CellStatusEnum = CellStatusEnum.Hidden;
+    ship: Ship;
+    coordinate: Coordinate;
+    shoot(): boolean {
+        this.isOpened = true;
+        this.ship.catchShoot(this);
 
-		return true;
-	}
-	constructor(coordinate: Coordinate) {
-		this.coordinate = coordinate;
-	}
+        return true;
+    }
+    constructor(coordinate: Coordinate) {
+        this.coordinate = coordinate;
+    }
 }

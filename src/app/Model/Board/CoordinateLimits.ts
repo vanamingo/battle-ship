@@ -1,4 +1,4 @@
 export class CoordinateLimits {
-    static XMax = 9;
-    static YMax = 9;
+    static  XMax = 9;
+    static  YMax = 9;
 }
