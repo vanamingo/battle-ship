@@ -40,5 +40,16 @@ describe('Ship', () => {
             ship.cells.forEach(c => c.shoot());        
             expect(ship.cells.every(c=> c.status === CellStatusEnum.Killed)).toBeTruthy();
         });
-    });
+
+        it('is not opened initially', () => {
+            const cell = ship.cells[0];
+            expect(cell.isOpened).toBeFalsy();
+        });
+    
+        it('is opened after a shoot', () => {
+            const cell = ship.cells[0];
+            cell.shoot();
+            expect(cell.isOpened).toBeTruthy();
+        });
+    });    
 });
