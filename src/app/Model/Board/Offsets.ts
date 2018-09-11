@@ -1,6 +1,5 @@
 import { Coordinate } from './Coordinate';
 
-
 export class Offsets {
 
 	static surroundingOffset = [
@@ -12,8 +11,6 @@ export class Offsets {
 		new Coordinate(0, -1),
 		new Coordinate(1, -1),
 		new Coordinate(1, 0)];
-
-
 
 	static getShipDotVariants(): Coordinate[][] {
 		const v1: Array<Coordinate> = [
@@ -45,13 +42,11 @@ export class Offsets {
 			new Coordinate(1, 1),
 			new Coordinate(2, 1)];
 
-
 		const v3: Array<Coordinate> = [
 			new Coordinate(0, 0),
 			new Coordinate(-1, 0),
 			new Coordinate(-1, 1),
 			new Coordinate(-1, 2)];
-
 
 		const v4: Array<Coordinate> = [
 			new Coordinate(0, 0),

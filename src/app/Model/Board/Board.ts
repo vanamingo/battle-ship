@@ -45,7 +45,6 @@ export class GameBoard {
 		return ([] as IGameCell[]).concat(...arr);
 	}
 
-
 	openCellsAroundShip(ship: Ship) {
 		const arr = this.getSurroundingCellsForArray(ship.cells)
 			.filter(c => c && !c.isOpened && c instanceof EmptyCell)
@@ -58,8 +57,8 @@ export class GameBoard {
 		this.gameBoard = Array(10)
 			.fill(0)
 			.map((k: number, y: number) => {
-				return Array(10).fill(0).map((p: number,x: number) => {
-					return new EmptyCell(new Coordinate(x,y));
+				return Array(10).fill(0).map((p: number, x: number) => {
+					return new EmptyCell(new Coordinate(x, y));
 				});
 			});
 
@@ -96,12 +95,12 @@ export class GameBoard {
 	private generateShip(offsetList: Array<Coordinate>): Ship {
 		const emptyCellsInRandomOrder = this.getAllEmptyCellsInRandomOrder();
 
-		while(true) {
-			let index = getRandomInt(0, emptyCellsInRandomOrder.length - 1);
-			let startCoordinate = emptyCellsInRandomOrder[index];
+		while (true) {
+			const index = getRandomInt(0, emptyCellsInRandomOrder.length - 1);
+			const startCoordinate = emptyCellsInRandomOrder[index];
 			emptyCellsInRandomOrder.splice(index, 1);
-			
-			if(!startCoordinate){
+
+			if (!startCoordinate) {
 				return null;
 			}
 
@@ -115,10 +114,8 @@ export class GameBoard {
 				this.gameBoard[cell.coordinate.X][cell.coordinate.Y] = cell;
 			});
 
-
 			return new Ship(shipCells);
 		}
-
 
 	}
 
@@ -147,6 +144,6 @@ export class GameBoard {
 		.concat(...this.gameBoard)
 		.filter(c => c instanceof EmptyCell)
 		.map(c => c.coordinate)
-		.sort(function(a, b){return 0.5 - Math.random()});
+		.sort(function(a, b) {return 0.5 - Math.random(); });
 	}
 }

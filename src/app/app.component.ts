@@ -7,7 +7,6 @@ import { Game } from './Model/Game';
   styleUrls: ['./app.component.css']
 })
 
-
 export class AppComponent {
 
   game: Game;

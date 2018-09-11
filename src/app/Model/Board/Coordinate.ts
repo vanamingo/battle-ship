@@ -1,4 +1,4 @@
-import { CoordinateLimits } from "./CoordinateLimits";
+import { CoordinateLimits } from './CoordinateLimits';
 
 export class Coordinate {
 	constructor(X: number, Y: number) {

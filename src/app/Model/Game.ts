@@ -39,7 +39,6 @@ export class Game {
 		setTimeout(() => this.robotMakesHisShoot(), 500);
 	}
 
-
 	finishGame(): any {
 		this.isGameFinished = true;
 	}
