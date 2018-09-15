@@ -1,12 +1,12 @@
-import { EmptyCell } from "../Board/EmptyCell";
-import { Coordinate } from "../Board/Coordinate";
-import { CellStatusEnum } from "../Board/CellStatusEnum";
+import { EmptyCell } from '../Board/EmptyCell';
+import { Coordinate } from '../Board/Coordinate';
+import { CellStatusEnum } from '../Board/CellStatusEnum';
 
 describe('EmptyCell', () => {
     let cell: EmptyCell;
 
     beforeEach(() => {
-        cell = new EmptyCell(new Coordinate(0,0));
+        cell = new EmptyCell(new Coordinate(0, 0));
     });
 
     it('has initial status Hidden', () => {

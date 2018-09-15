@@ -1,7 +1,7 @@
-import { Coordinate } from "../Board/Coordinate";
-import { CoordinateLimits } from "../Board/CoordinateLimits";
-import { TestDataFactory } from "./TestDataFactory";
-import { GameBoard } from "../Board/Board";
+import { Coordinate } from '../Board/Coordinate';
+import { CoordinateLimits } from '../Board/CoordinateLimits';
+import { TestDataFactory } from './TestDataFactory';
+import { GameBoard } from '../Board/Board';
 
 describe('GameBoard', () => {
     let gameBoard: GameBoard;
@@ -36,7 +36,7 @@ describe('GameBoard', () => {
     describe('common ship statuses', () => {
         it('should not be killed inittialy', () => {
             expect(gameBoard.allShipsAreKilled()).toBeFalsy();
-        })
+        });
 
         it('should not be killed after an empty shoot', () => {
             gameBoard.getAllHiddenCells()[0].shoot();

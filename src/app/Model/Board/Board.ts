@@ -13,8 +13,8 @@ export class GameBoard {
     gameBoard: IGameCell[][];
     ships: Ship[] = [];
 
-    constructor(gameBoard?: IGameCell[][], ships?: Ship[]) {        
-        if(gameBoard && ships){
+    constructor(gameBoard?: IGameCell[][], ships?: Ship[]) {
+        if (gameBoard && ships) {
             this.gameBoard = gameBoard;
             this.ships = ships;
             return;
